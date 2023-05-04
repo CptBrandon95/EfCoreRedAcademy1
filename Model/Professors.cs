@@ -1,6 +1,4 @@
-﻿using EfCoreAcademy.Mode;
-
-namespace EfCoreAcademy.Model
+﻿namespace EfCoreRedAcademy1.Model
 {
     public class Professors : BaseEntity
     {

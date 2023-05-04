@@ -1,4 +1,4 @@
-﻿namespace EfCoreAcademy.Mode
+﻿namespace EfCoreRedAcademy1.Model
 {
     public class BaseEntity
     {
