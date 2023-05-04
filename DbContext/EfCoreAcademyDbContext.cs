@@ -1,8 +1,7 @@
-﻿using EfCoreAcademy.EfCoreAcademyContext;
-using EfCoreAcademy.Model;
+﻿using EfCoreRedAcademy1.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace EfCoreAcademy
+namespace EfCoreRedAcademy1
 {
     public class EfCoreAcademyDbContext : DbContext
     {
@@ -18,7 +17,7 @@ namespace EfCoreAcademy
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=EfCoreAcademy.db");
+            optionsBuilder.UseSqlite("Filename=EfCoreRedAcademy.db");
             base.OnConfiguring(optionsBuilder);
         }
 
