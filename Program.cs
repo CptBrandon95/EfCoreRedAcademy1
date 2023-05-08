@@ -1,5 +1,7 @@
-﻿using EfCoreRedAcademy1.Model;
+﻿using EfCoreRedAcademy1.GenRepo;
+using EfCoreRedAcademy1.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace EfCoreRedAcademy1
 {
@@ -94,11 +96,30 @@ namespace EfCoreRedAcademy1
                 dbContext = new EfCoreAcademyDbContext(options);
 
                 student = dbContext.Students.First();
+                dbContext.Dispose();
 
             }
 
+            async void ProcessRepository()
+            {
+                dbContext = new EfCoreAcademyDbContext(options);
+                var repository = new GenericRepo<Student>(dbContext);
+
+                // simple select
+                var studnets = await repository.GetAsync(null, null);
+                var student = await repository.GetByIdAsync(studnets.First().Id);
+
+                // Includes
+                student = await repository.GetByIdAsync(student.Id, (student) => student.Addresses,
+                    (student => student.Classes));
+
+                // filters
+                Expression<Func<Student, bool>> filter = (student) => student.FirstName == "Jane";
+                studnets = await repository.GetFilteredAsync(new[] { filter }, null, null);
+                Console.ReadLine();
+            }
             
-           Console.ReadLine();
+          
         }
     }
 }
